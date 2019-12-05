@@ -1,0 +1,2 @@
+柴调用叶的方法，传guid给叶，叶拿到guid访问下面借口获取模型数据
+/model/rest/pb/guid2obj/?guid=c7b98c46-6335-45b2-a7a5-676bff4527af-00192243

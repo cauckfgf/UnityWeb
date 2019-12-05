@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Test1</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+    /** 
+    * 销毁iframe，释放iframe所占用的内存。 
+    * @param iframe 需要销毁的iframe id 
+    */
+    function destroyIframe(iframeID){ 
+        var iframe = document.getElementById(iframeID);
+        
+        //把iframe指向空白页面，这样可以释放大部分内存。 
+        iframe.src = 'about:blank'; 
+        
+        try{ 
+            iframe.contentWindow.document.write(''); 
+            iframe.contentWindow.document.clear(); 
+        }catch(e){} 
+        
+        //把iframe从页面移除 
+        iframe.parentNode.removeChild(iframe); 
+
+    }
+    function createIfame(){ 
+        var bbb = document.getElementById("bbb");
+        bbb.innerHTML = `<iframe id="aaa" src="" style="height:100%;width:100%;"></iframe>`
+
+
+    }
+
+    function test1() {
+        destroyIframe("aaa")
+        createIfame()
+        document.getElementById("aaa").src='/static/UnityWeb/Unity/Test1/' 
+
+    }
+
+    function test2() {
+        destroyIframe("aaa")
+        createIfame()
+        document.getElementById("aaa").src='/static/UnityWeb/Unity/Test2/Project1/' 
+
+    }
+
+    function test3() {
+        destroyIframe("aaa")
+        createIfame()
+        document.getElementById("aaa").src='/static/UnityWeb/Unity/Test2/Project2/' 
+    }
+    </script>
+</head>
+
+<body>
+    <div style="height:90vh;width:90vw;" id='bbb'>
+      <iframe id="aaa" src="" style="height:100%;width:100%;"></iframe>
+    </div>
+    
+    <div style="position:absolute;top:250px;left:20px">
+        <button onclick="test1()">一个工程两个场景</button>
+        <button onclick="test2()">场景1独立工程</button>
+        <button onclick="test3()">场景2独立工程</button>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 619731919
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: floors/shell
+      Dependencies: {}
+    Info_1:
+      Name: floors/air-conditioner
+      Dependencies: {}

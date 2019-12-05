@@ -1,0 +1,13 @@
+{
+"companyName": "ZZKJ",
+"productName": "Project2",
+"dataUrl": "Project2.data.unityweb",
+"asmCodeUrl": "Project2.asm.code.unityweb",
+"asmMemoryUrl": "Project2.asm.memory.unityweb",
+"asmFrameworkUrl": "Project2.asm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}

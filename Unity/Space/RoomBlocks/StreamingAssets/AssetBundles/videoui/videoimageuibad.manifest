@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 3355494930
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: cf75b125458c3a4260e1f6a55a13c8f2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b474380d27eb4bc856799e9c585c4864
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/EditorResources/AssetBundles/videoui/videoimageuibad.png
+Dependencies: []

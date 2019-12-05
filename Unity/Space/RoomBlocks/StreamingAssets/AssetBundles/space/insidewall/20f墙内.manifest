@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 3110120695
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c5e3946898280579a4e5a64d2cf9316a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0a9d000c67bb3b371a8c4e0fe8b14a8f
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+Assets:
+- "Assets/EditorResources/AssetBundles/space/insidewall/20F\u5899\u5185.prefab"
+Dependencies: []

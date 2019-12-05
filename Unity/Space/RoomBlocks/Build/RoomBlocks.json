@@ -1,0 +1,14 @@
+﻿{
+"companyName": "ZZKJ",
+"productName": "RoomBlocks",
+"dataUrl": "RoomBlocks.data.unityweb",
+"asmCodeUrl": "RoomBlocks.asm.code.unityweb",
+"asmMemoryUrl": "RoomBlocks.asm.memory.unityweb",
+"asmFrameworkUrl": "RoomBlocks.asm.framework.unityweb",
+"TOTAL_MEMORY": 1073741824,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "transparent",
+"cacheControl": {"default": "must - revalidate"}
+}

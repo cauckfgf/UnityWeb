@@ -1,0 +1,61 @@
+---------------------
+1. 改变单个  房间体块颜色 传递四个参数 ( 楼层, guid,color,房间类型(部门还是用途))  "/"区分  楼层ID 0-25
+   
+    SendMessage("Canvas", "ChangeRoomBlockColor", "楼层/guid/color/房间类型");
+
+
+----------------------
+2.  更改体块类型颜色 用途传递--"category"  部门传递--"department"
+
+   SendMessage("Canvas", "ChangeRoomType", "category  or  department");
+
+----------------------
+3.楼层切换  1.楼层ID(0-25) 2.监控摄像头是否开启 3.人脸识别是否开启 4.是否只在空间体块界面  5是否开启了漫游  bool-->false/true  人脸和摄像头暂时没有都为false
+   
+   SendMessage("Canvas", "ChangeFloor","楼层号/bool(isCamera)/bool(Isface)/bool(ISblock)/bool (退出漫游)");
+
+----------------------
+4 相机移动到guid对应物体 
+
+ SendMessage("Canvas", "CameraMove","guid");
+
+----------------------
+5.是否切换到只有体块的环境 
+
+
+SendMessage("Canvas", "SwitchOnlyBlocks","bool");
+
+
+6.是否隐藏大环境
+SendMessage("Canvas", "HideEviromentofThewall","bool");
+
+7. 是否隐藏墙壁
+
+SendMessage("Canvas", "HideWalls","bool");
+
+
+8. 是否隐藏墙内
+
+SendMessage("Canvas", "HideInsideTheWall","bool");
+
+-------------------------
+9. 是否隐藏人脸
+
+SendMessage("Canvas", "HideCameraFace","bool");
+
+
+
+10. 是否隐藏普通摄像头
+
+SendMessage("Canvas", "HideCommonCamera","bool");
+
+-----------------
+11.高亮取消
+
+SendMessage("Canvas", "CancelHighlihter");
+
+
+----------------
+12.相机俯视角 对应楼层ID
+
+SendMessage("Canvas", "OnCommonCameraLookDown","floorid")
