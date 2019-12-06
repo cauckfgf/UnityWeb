@@ -140,19 +140,19 @@
 		}
 	}
 </style>
-<style>
-	@import "~view-design/dist/styles/iview.css";
-	@import "~vue-draggable-resizable/dist/VueDraggableResizable.css";
+<style lang="less">
+	@import "~view-design/src/styles/index.less";
 	@import "./resource/baseCss.css";
+	@import "./variables.less";
 
 	@font-face {
 		font-family: 'iconfont';  /* project id 1531202 */
-		src: url('//at.alicdn.com/t/font_1531202_45b2vi9l7xf.eot');
-		src: url('//at.alicdn.com/t/font_1531202_45b2vi9l7xf.eot?#iefix') format('embedded-opentype'),
-		url('//at.alicdn.com/t/font_1531202_45b2vi9l7xf.woff2') format('woff2'),
-		url('//at.alicdn.com/t/font_1531202_45b2vi9l7xf.woff') format('woff'),
-		url('//at.alicdn.com/t/font_1531202_45b2vi9l7xf.ttf') format('truetype'),
-		url('//at.alicdn.com/t/font_1531202_45b2vi9l7xf.svg#iconfont') format('svg');
+		src: url('//at.alicdn.com/t/font_1531202_2lgi9j042v.eot');
+		src: url('//at.alicdn.com/t/font_1531202_2lgi9j042v.eot?#iefix') format('embedded-opentype'),
+		url('//at.alicdn.com/t/font_1531202_2lgi9j042v.woff2') format('woff2'),
+		url('//at.alicdn.com/t/font_1531202_2lgi9j042v.woff') format('woff'),
+		url('//at.alicdn.com/t/font_1531202_2lgi9j042v.ttf') format('truetype'),
+		url('//at.alicdn.com/t/font_1531202_2lgi9j042v.svg#iconfont') format('svg');
 	}
 
 	.iconfont {
@@ -187,6 +187,27 @@
 		width: 5px;
 		background-color: #18598f
 	}
+
+	// custom
+	@input-color: #FFF;
+	@input-bg: transparent;
+	@subsidiary-color: #FFF;
+	.ivu-select-dropdown {
+		background-color: @infoBlockBackground;
+	}
+
+	.ivu-select-item {
+		color: #FFF
+	}
+
+	.ivu-input-prefix i, .ivu-input-suffix i {
+		color: #FFF
+	}
+
+	.ivu-select-selection {
+		background: transparent;
+		color: #FFF
+	}
 </style>
 <template>
 	<div id="root">
@@ -210,7 +231,7 @@
 				<div class="secondLevel">
 					<div :class="{active:secondActive===i.name}" :key="i.name" @click="handleSecondClick(i)"
 						class="functions" v-for="i in secondLevel">
-						<i class="iconfont" style="display: block;font-size: 24px" v-html="i.icon"></i>
+						<i class="iconfont" style="display: block;font-size: 24px" v-html="i.icon" />
 						<div style="color: white">{{i.name}}</div>
 					</div>
 				</div>
@@ -310,8 +331,18 @@
 							href: "/home"
 						},
 						{
+							icon: "&#xe609;",
+							name: "3D台帐"
+						}
+					]
+				},
+				{
+					"name": "空间管理",
+					children: [
+						{
 							icon: "&#xe696;",
-							name: "空间总览"
+							name: "空间总览",
+							href: "/space/main/"
 						},
 						{
 							icon: "&#xe601;",
@@ -328,14 +359,9 @@
 						{
 							icon: "&#xe62c;",
 							name: "建筑载荷"
-						},
-						{
-							icon: "&#xe609;",
-							name: "3D台帐"
 						}
 					]
 				},
-				{ "name": "空间管理" },
 				{ "name": "维修维保" },
 				{ "name": "安防管理" },
 				{

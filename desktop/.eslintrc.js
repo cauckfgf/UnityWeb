@@ -13,7 +13,7 @@ module.exports = {
 		"no-debugger": "off",
 		"semi": ["error", "always"],
 		"quotes": ["error", "double"],
-		"no-tabs": ["error", {allowIndentationTabs: true}],
+		"no-tabs": ["error", { allowIndentationTabs: true }],
 		indent: ["error", "tab"],
 		"vue/script-indent": [
 			"error", "tab",
@@ -21,7 +21,8 @@ module.exports = {
 				baseIndent: 1
 			}
 		],
-		"comma-spacing": ["error", {before: false, after: true}]
+		"comma-spacing": ["error", { before: false, after: true }],
+		"template-curly-spacing": ["error", "always"]
 	},
 	parserOptions: {
 		parser: "@typescript-eslint/parser"

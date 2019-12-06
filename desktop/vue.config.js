@@ -40,5 +40,12 @@ module.exports = {
 	chainWebpack: config => {
 		config.resolve.alias["~"] = "node_modules";
 		return config;
+	},
+	css: {
+		loaderOptions: {
+			less: {
+				javascriptEnabled: true
+			}
+		}
 	}
 };

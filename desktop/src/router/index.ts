@@ -25,6 +25,18 @@ const routes:RouteConfig[] = [
 				component: () => import("../views/medicalData/outpatient.vue")
 			}
 		]
+	},
+	{
+		path: "/space/",
+		name: "space",
+		component: () => import("../views/space/spaceRoot.vue"),
+		children: [
+			{
+				path: "main/",
+				name: "spaceMain",
+				component: () => import("../views/space/spaceMain.vue")
+			}
+		]
 	}
 ];
 

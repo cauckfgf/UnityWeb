@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/static/UnityWeb/desktop/dist/precache-manifest.17a65c173fcf4b64e3abfbcbde665eed.js"
+  "/static/UnityWeb/desktop/dist/precache-manifest.33d93e3ee457ed51ca1027aeed22f307.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "desktop"});
