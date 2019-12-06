@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 533445358
+CRC: 3739935419
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -103,4 +103,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_33:
       Name: videoui/videoimageuigood
+      Dependencies: {}
+    Info_34:
+      Name: "space/insidewall/27f\u5899\u5185"
       Dependencies: {}
