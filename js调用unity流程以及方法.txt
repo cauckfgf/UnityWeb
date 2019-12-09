@@ -15,9 +15,11 @@
    SendMessage("Canvas", "ChangeFloor","楼层号/bool(isCamera)/bool(Isface)/bool(ISblock)/bool (退出漫游)");
 
 ----------------------
-4 相机移动到guid对应物体 
-
- SendMessage("Canvas", "CameraMove","guid");
+4 切换楼层后 相机移动到guid对应物体 
+  (1.)确认在本楼层  floorid/guid
+ SendMessage("Canvas", "CameraMove","楼层号/guid");
+   (2.)体块不在本楼层  5个参数
+ SendMessage("Canvas", "ChangeFloor","楼层号/bool(isCamera)/bool(Isface)/bool(ISblock)/bool (退出漫游)/guid");
 
 ----------------------
 5.是否切换到只有体块的环境 
@@ -59,3 +61,9 @@ SendMessage("Canvas", "CancelHighlihter");
 12.相机俯视角 对应楼层ID(90-117)
 
 SendMessage("Canvas", "OnCommonCameraLookDown","floorid")
+  
+----------------
+13.开启维修维保
+
+
+SendMessage("Canvas", "OpenRepair")
