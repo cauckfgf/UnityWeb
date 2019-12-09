@@ -16,8 +16,8 @@
 
 ----------------------
 4 切换楼层后 相机移动到guid对应物体 
-  (1.)确认在本楼层  floorid/guid
- SendMessage("Canvas", "CameraMove","楼层号/guid");
+  (1.)确认在本楼层  guid
+ SendMessage("Canvas", "ChangeCamera","guid");
    (2.)体块不在本楼层  5个参数
  SendMessage("Canvas", "ChangeFloor","楼层号/bool(isCamera)/bool(Isface)/bool(ISblock)/bool (退出漫游)/guid");
 

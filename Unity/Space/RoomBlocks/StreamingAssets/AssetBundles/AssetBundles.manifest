@@ -1,13 +1,13 @@
 ManifestFileVersion: 0
-CRC: 102611527
+CRC: 4186000617
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: repairui/weibo
+      Name: videoui/videoimageuibad
       Dependencies: {}
     Info_1:
-      Name: repairui/weixiu
+      Name: videoui/videoimageuigood
       Dependencies: {}
     Info_2:
-      Name: repairui/yujing
+      Name: videoui/videoclickui
       Dependencies: {}
