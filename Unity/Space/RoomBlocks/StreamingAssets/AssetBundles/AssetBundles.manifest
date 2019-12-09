@@ -1,109 +1,13 @@
 ManifestFileVersion: 0
-CRC: 3739935419
+CRC: 102611527
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: space/bloack
+      Name: repairui/weibo
       Dependencies: {}
     Info_1:
-      Name: space/commoncamera
+      Name: repairui/weixiu
       Dependencies: {}
     Info_2:
-      Name: space/environ
-      Dependencies: {}
-    Info_3:
-      Name: space/face
-      Dependencies: {}
-    Info_4:
-      Name: space/wall
-      Dependencies: {}
-    Info_5:
-      Name: "space/insidewall/0f\u5899\u5185"
-      Dependencies: {}
-    Info_6:
-      Name: "space/insidewall/10f\u5899\u5185"
-      Dependencies: {}
-    Info_7:
-      Name: "space/insidewall/11f\u5899\u5185"
-      Dependencies: {}
-    Info_8:
-      Name: "space/insidewall/12f\u5899\u5185"
-      Dependencies: {}
-    Info_9:
-      Name: "space/insidewall/13f\u5899\u5185"
-      Dependencies: {}
-    Info_10:
-      Name: "space/insidewall/14f\u5899\u5185"
-      Dependencies: {}
-    Info_11:
-      Name: "space/insidewall/15f\u5899\u5185"
-      Dependencies: {}
-    Info_12:
-      Name: "space/insidewall/16f\u5899\u5185"
-      Dependencies: {}
-    Info_13:
-      Name: "space/insidewall/17f\u5899\u5185"
-      Dependencies: {}
-    Info_14:
-      Name: "space/insidewall/18f\u5899\u5185"
-      Dependencies: {}
-    Info_15:
-      Name: "space/insidewall/19f\u5899\u5185"
-      Dependencies: {}
-    Info_16:
-      Name: "space/insidewall/1f\u5899\u5185"
-      Dependencies: {}
-    Info_17:
-      Name: "space/insidewall/20f\u5899\u5185"
-      Dependencies: {}
-    Info_18:
-      Name: "space/insidewall/21f\u5899\u5185"
-      Dependencies: {}
-    Info_19:
-      Name: "space/insidewall/22f\u5899\u5185"
-      Dependencies: {}
-    Info_20:
-      Name: "space/insidewall/23f\u5899\u5185"
-      Dependencies: {}
-    Info_21:
-      Name: "space/insidewall/24f\u5899\u5185"
-      Dependencies: {}
-    Info_22:
-      Name: "space/insidewall/25f\u5899\u5185"
-      Dependencies: {}
-    Info_23:
-      Name: "space/insidewall/26f\u5899\u5185"
-      Dependencies: {}
-    Info_24:
-      Name: "space/insidewall/2f\u5899\u5185"
-      Dependencies: {}
-    Info_25:
-      Name: "space/insidewall/3f\u5899\u5185"
-      Dependencies: {}
-    Info_26:
-      Name: "space/insidewall/4f\u5899\u5185"
-      Dependencies: {}
-    Info_27:
-      Name: "space/insidewall/5f\u5899\u5185"
-      Dependencies: {}
-    Info_28:
-      Name: "space/insidewall/6f\u5899\u5185"
-      Dependencies: {}
-    Info_29:
-      Name: "space/insidewall/7f\u5899\u5185"
-      Dependencies: {}
-    Info_30:
-      Name: "space/insidewall/8f\u5899\u5185"
-      Dependencies: {}
-    Info_31:
-      Name: "space/insidewall/9f\u5899\u5185"
-      Dependencies: {}
-    Info_32:
-      Name: videoui/videoimageuibad
-      Dependencies: {}
-    Info_33:
-      Name: videoui/videoimageuigood
-      Dependencies: {}
-    Info_34:
-      Name: "space/insidewall/27f\u5899\u5185"
+      Name: repairui/yujing
       Dependencies: {}

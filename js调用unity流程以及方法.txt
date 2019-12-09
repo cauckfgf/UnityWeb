@@ -1,5 +1,5 @@
 ---------------------
-1. 改变单个  房间体块颜色 传递四个参数 ( 楼层, guid,color,房间类型(部门还是用途))  "/"区分  楼层ID 0-25
+1. 改变单个  房间体块颜色 传递四个参数 ( 楼层, guid,color,房间类型(部门还是用途))  "/"区分  楼层ID 90-117
    
     SendMessage("Canvas", "ChangeRoomBlockColor", "楼层/guid/color/房间类型");
 
@@ -10,7 +10,7 @@
    SendMessage("Canvas", "ChangeRoomType", "category  or  department");
 
 ----------------------
-3.楼层切换  1.楼层ID(0-25) 2.监控摄像头是否开启 3.人脸识别是否开启 4.是否只在空间体块界面  5是否开启了漫游  bool-->false/true  人脸和摄像头暂时没有都为false
+3.楼层切换  1.楼层ID(90-117) 2.监控摄像头是否开启 3.人脸识别是否开启 4.是否只在空间体块界面  5是否开启了漫游  bool-->false/true  人脸和摄像头暂时没有都为false
    
    SendMessage("Canvas", "ChangeFloor","楼层号/bool(isCamera)/bool(Isface)/bool(ISblock)/bool (退出漫游)");
 
@@ -56,6 +56,6 @@ SendMessage("Canvas", "CancelHighlihter");
 
 
 ----------------
-12.相机俯视角 对应楼层ID
+12.相机俯视角 对应楼层ID(90-117)
 
 SendMessage("Canvas", "OnCommonCameraLookDown","floorid")
