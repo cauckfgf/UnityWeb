@@ -147,12 +147,12 @@
 
 	@font-face {
 		font-family: 'iconfont';  /* project id 1531202 */
-		src: url('//at.alicdn.com/t/font_1531202_2lgi9j042v.eot');
-		src: url('//at.alicdn.com/t/font_1531202_2lgi9j042v.eot?#iefix') format('embedded-opentype'),
-		url('//at.alicdn.com/t/font_1531202_2lgi9j042v.woff2') format('woff2'),
-		url('//at.alicdn.com/t/font_1531202_2lgi9j042v.woff') format('woff'),
-		url('//at.alicdn.com/t/font_1531202_2lgi9j042v.ttf') format('truetype'),
-		url('//at.alicdn.com/t/font_1531202_2lgi9j042v.svg#iconfont') format('svg');
+		src: url('//at.alicdn.com/t/font_1531202_0k5i1v8mhp0u.eot');
+		src: url('//at.alicdn.com/t/font_1531202_0k5i1v8mhp0u.eot?#iefix') format('embedded-opentype'),
+		url('//at.alicdn.com/t/font_1531202_0k5i1v8mhp0u.woff2') format('woff2'),
+		url('//at.alicdn.com/t/font_1531202_0k5i1v8mhp0u.woff') format('woff'),
+		url('//at.alicdn.com/t/font_1531202_0k5i1v8mhp0u.ttf') format('truetype'),
+		url('//at.alicdn.com/t/font_1531202_0k5i1v8mhp0u.svg#iconfont') format('svg');
 	}
 
 	.iconfont {
@@ -207,6 +207,14 @@
 	.ivu-select-selection {
 		background: transparent;
 		color: #FFF
+	}
+
+	.ivu-select-item:hover, .ivu-select-item-focus {
+		background: hsla(201, 59%, 50%, 0.8);
+	}
+
+	.ivu-page-simple .ivu-page-simple-pager input {
+		color: #000
 	}
 </style>
 <template>
@@ -288,7 +296,7 @@
 		public secondLevel:subMenu[] = [];
 		public attachInfo:{ name:string, value:any }[] = [];
 		public showAttach:boolean = false;
-		public src:string = (process.env.NODE_ENV === "production" ? "/static/UnityWeb/Unity/Space/RoomBlocks" : "//about;blank") + "";
+		public src:string = (process.env.NODE_ENV === "production" ? "/static/UnityWeb/Unity" : "") + "/Space/RoomBlocks/";
 		private cancelToken?:any;
 
 		public handleMenuClick (i:menu, index:number) {
@@ -363,7 +371,16 @@
 					]
 				},
 				{ "name": "维修维保" },
-				{ "name": "安防管理" },
+				{
+					"name": "安防管理",
+					children: [
+						{
+							name: "视频监控",
+							icon: "&#xe60c;",
+							href: "/smt/main/"
+						}
+					]
+				},
 				{
 					"name": "医疗管理",
 					children: [
@@ -416,27 +433,56 @@
 				}
 			];
 			// @ts-ignore
-			const frame:HTMLIFrameElement | null = document.getElementById("frame");
-			// @ts-ignore
-			frame.contentWindow.selected = (id:string) => {
-				this.cancelToken && this.cancelToken();
-				request({
-					url: "/model/rest/pb/guid2obj/",
-					params: {
-						guid: id
-					},
-					cancelToken: new CancelToken(cancel => {
-						this.cancelToken = cancel;
-					})
-				}).then(({ data }) => {
-					this.attachInfo = [
-						{ name: "名称", value: data.rooms[ 0 ].Name },
-						{ name: "楼层", value: data.rooms[ 0 ].floor__name },
-						{ name: "编号", value: data.rooms[ 0 ].number }
-					];
-					this.showAttach = true;
-				});
-			};
+			let frame:HTMLIFrameElement | null;
+			const Interval = setInterval(() => {
+				// @ts-ignore
+				frame = window.frames.frame;
+				// @ts-ignore
+				if (frame && frame.contentWindow && frame.contentWindow.gameInstance) {
+					clearInterval(Interval);
+					// @ts-ignore
+					frame.contentWindow.selected = (id:string) => {
+						if (this.$route.name === "home") {
+							this.cancelToken && this.cancelToken();
+							request({
+								url: "/model/rest/pb/guid2obj/",
+								params: {
+									guid: id
+								},
+								cancelToken: new CancelToken(cancel => {
+									this.cancelToken = cancel;
+								})
+							}).then(({ data }) => {
+								this.attachInfo = [
+									{ name: "名称", value: data.rooms[ 0 ].Name },
+									{ name: "楼层", value: data.rooms[ 0 ].floor__name },
+									{ name: "编号", value: data.rooms[ 0 ].number }
+								];
+								this.showAttach = true;
+							});
+						}
+					};
+					this.$store.subscribe((mutation) => {
+						// @ts-ignore
+						const SendMessage:Function = frame.contentWindow.gameInstance.SendMessage;
+						if (mutation.type === "changeViewByCode") {
+							const id = mutation.payload.id;
+							if (id === "") {
+								SendMessage("Canvas", "HideEviromentofThewall", "true");
+								SendMessage("Canvas", "SwitchOnlyBlocks", "false");
+							} else {
+								SendMessage("Canvas", "ChangeFloor", mutation.payload.id + "/false/false/false/false");
+								if (id !== "91") {
+									SendMessage("Canvas", "HideEviromentofThewall", "true");
+								}
+							}
+						} else if (mutation.type === "changeColorType") {
+							SendMessage("Canvas", "ChangeRoomType", mutation.payload);
+							console.log(mutation.payload);
+						}
+					});
+				}
+			}, 100);
 		}
 	}
 </script>

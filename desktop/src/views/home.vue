@@ -723,6 +723,7 @@
 			this.getWater();
 			this.getEle();
 			this.getRepair();
+			this.$store.commit("changeViewByCode", { type: "room", id: "" });
 		}
 
 		private sortChunk (chunk:any[], name:string):{ time:string, value:number, name:string }[] {

@@ -37,6 +37,18 @@ const routes:RouteConfig[] = [
 				component: () => import("../views/space/spaceMain.vue")
 			}
 		]
+	},
+	{
+		path: "/smt/",
+		name: "smt",
+		component: () => import("../views/smt/smtRoot.vue"),
+		children: [
+			{
+				path: "main/",
+				name: "smtMain",
+				component: () => import("../views/smt/smtMain.vue")
+			}
+		]
 	}
 ];
 

@@ -19,7 +19,7 @@
 			position: absolute;
 			left: 100%;
 			width: 80px;
-			top: 50%;
+			top: 25%;
 		}
 
 		&:hover {
@@ -53,6 +53,7 @@
 		height: 20px;
 		text-align: center;
 		background-color: rgba(255, 255, 255, 0.6);
+		cursor: pointer;
 
 		&.active {
 			background-color: rgba(0, 255, 154, .6);
@@ -92,12 +93,12 @@
 				old.active = false;
 			}
 			const data = this.currentDataset.find(t => t.id === id);
-			this.$store.commit("changeViewByCode", { type: "room", id });
 			if (data) {
 				data.active = true;
 			} else {
 				throw new Error("no specific data find");
 			}
+			this.$store.commit("changeViewByCode", { type: "room", id });
 		}
 
 		showAll () {
@@ -108,17 +109,13 @@
 			this.$store.commit("changeViewByCode", { type: "room", id: "" });
 		}
 
-		mounted () {
-			this.$store.commit("changeViewByCode", { type: "room", id: "" });
-		}
-
 		@Watch("dataset")
 		onDatasetChange (value:{ name:string, id:number }[]) {
-			this.$store.commit("changeViewByCode", { type: "room", id: "" });
+			const active = this.$store.state.modelValue;
 			this.currentDataset = value.map((t) => {
 				return {
 					...t,
-					active: false
+					active: t.id === active
 				};
 			});
 		}

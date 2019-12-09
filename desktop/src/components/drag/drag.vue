@@ -25,6 +25,8 @@
 			background-color: @mainBackground;
 			flex-grow: 1;
 			overflow: auto;
+			flex-shrink: 0;
+			max-height: 170px;
 		}
 	}
 
@@ -60,7 +62,7 @@
 			<slot />
 		</div>
 		<div class="foot">
-			<slot class="foot" name="foot" />
+			<slot name="foot" />
 		</div>
 	</div>
 </template>

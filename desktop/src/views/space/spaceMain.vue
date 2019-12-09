@@ -1,28 +1,14 @@
-<style lang=less>
+<style lang=less scoped>
 	@import "../../variables.less";
+	@import "../../resource/common.less";
 
-	.head {
-		line-height: 32px;
-		flex-shrink: 0;
-
-		.attach {
-			width: 150px;
-			float: right;
-		}
-	}
-
+	@currentWidth: 600px;
+	@attachWidth: 150px;
 	.body {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		padding: @bigSpace;
-	}
-
-	.blockTitle {
-		font-size: @fontSizeC;
-		margin-left: @middleSpace;
-		border-bottom: 1px solid #FFF;
-		color: white;
 	}
 
 	.info {
@@ -64,19 +50,6 @@
 		}
 	}
 
-	.mainContent {
-		width: 700px;
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		background-color: @mainBackground;
-		padding: @smallSpace;
-		pointer-events: all;
-	}
-
 	.table {
 		width: 100%;
 		color: #FFF;
@@ -89,6 +62,7 @@
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
+
 		table {
 			width: 100%;
 		}
@@ -101,12 +75,17 @@
 				width: 25%;
 			}
 		}
-		.roomDetail{
+
+		&.roomDetail {
 			td, th {
 				width: 16.666666%;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
 			}
 		}
-		.tableDetail{
+
+		.tableDetail {
 			flex-grow: 1;
 			height: 100%;
 			overflow: auto;
@@ -121,14 +100,39 @@
 			display: inline-block;
 		}
 	}
+
+	.legends {
+		position: absolute;
+		width: 500px + 2 * @middleSpace;
+		bottom: 0;
+		right: 620px;
+		background-color: @lightTitleBackground;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		color: #FFF;
+		padding: @middleSpace;
+
+		&:empty {
+			display: none;
+		}
+
+		.legend {
+			width: 100px;
+
+			code {
+				margin-right: @smallSpace;
+			}
+		}
+	}
 </style>
 <template>
 	<div>
 		<div class="mainContent">
 			<div class="head">
-				<span style="font-size: 22px;color: #FFF">房间总览</span>
+				<span style="font-size: 22px;color: #FFF">空间总览</span>
 				<div class="attach">
-					<Select size="small" v-model="countType">
+					<Select @on-change="changeColor" size="small" v-model="countType">
 						<Option value="0">按部门统计</Option>
 						<Option value="1">按用途统计</Option>
 					</Select>
@@ -163,7 +167,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="table" :class="{roomDetail:showDetail}">
+				<div :class="{roomDetail:showDetail}" class="table">
 					<template v-if="!showDetail">
 						<table>
 							<thead>
@@ -187,7 +191,7 @@
 						</div>
 					</template>
 					<template v-else>
-						<Loading v-if="roomLoading"  />
+						<Loading v-if="roomLoading" />
 						<template v-else>
 							<table>
 								<thead>
@@ -203,14 +207,18 @@
 							</table>
 							<div class="tableDetail">
 								<table>
-									<tr :key="i.name" v-for="i in roomDetail">
+									<tr :key="i.id" v-for="i in roomDetail">
+										<td>{{i.number}}</td>
 										<td>{{i.name}}</td>
-										<td>{{i.count}}</td>
-										<td>{{i.areaUse}}</td>
-										<td>{{i.buildUse}}</td>
+										<td>{{i.department_name}}</td>
+										<td>{{i.category_name}}</td>
+										<td>{{i.department_name?"使用中":"未使用"}}</td>
+										<td>{{i.NetArea}}</td>
 									</tr>
 								</table>
 							</div>
+							<Page :current.sync="tableCurrent" :total="total" @on-change="pageChange" show-total simple
+								size="small" style="text-align: right" />
 						</template>
 					</template>
 				</div>
@@ -255,7 +263,7 @@
 				<div class="blockTitle">
 					房间面积统计
 				</div>
-				<div style="text-align: center;color: #FFF;font-size: 18px" class="clearfix">
+				<div class="clearfix" style="text-align: center;color: #FFF;font-size: 18px">
 					<div style='width: 50%;float:left;'>用途面积占比</div>
 					<div style='width: 50%;float:left;'>部门面积占比</div>
 				</div>
@@ -266,11 +274,17 @@
 			</div>
 		</div>
 		<FloorSelector :dataset="floors" style="position: absolute;left: 80px;bottom:20px;pointer-events: all" />
+		<div class="legends">
+			<div :key="i.name" class="legend" v-for="i in currentLegend">
+				<code :style="{color: i.color}">■</code>
+				<span>{{i.name}}</span>
+			</div>
+		</div>
 	</div>
 </template>
 <script lang=ts>
 	import { Component, Vue } from "vue-property-decorator";
-	import { Option, Select } from "view-design";
+	import { Option, Page, Select } from "view-design";
 	import request from "@/request";
 	import FloorSelector from "@/components/floorSelector/floorSelector.vue";
 	import { Route } from "vue-router";
@@ -282,7 +296,8 @@
 			Select,
 			Option,
 			FloorSelector,
-			Loading
+			Loading,
+			Page
 		},
 		filters: {
 			getPresent (value:number, baseValue:number):string {
@@ -296,7 +311,7 @@
 	})
 	export default class SpaceMain extends Vue {
 		floors:{ name:string, id:number }[] = [];
-		countType:"0" | "1" = "0";
+		countType:"0" | "1" = "1";
 		showDetail:boolean = false;
 		roomCount:number = 0;
 		usageCount:number = 0;
@@ -309,6 +324,12 @@
 		};
 		roomDetail:any[] = [];
 		roomLoading:boolean = true;
+		legend:{ usage:{ name:string, color:string }[], department:{ name:string, color:string }[] } = {
+			usage: [],
+			department: []
+		};
+		total:number = 0;
+		tableCurrent:number = 1;
 		readonly chartIdA:string = "id" + parseInt(Math.random() * 100 + "1");
 		readonly chartIdB:string = "id" + parseInt(Math.random() * 100 + "1");
 		private readonly subscribe = this.$store.subscribe((mutation, state) => {
@@ -331,8 +352,14 @@
 			return this.roomCount - usedCount;
 		}
 
+		get currentLegend ():{ name:string, color:string }[] {
+			return this.countType === "0" ? this.legend.department : this.legend.usage;
+		}
+
 		getCount () {
 			const floor = this.$store.state.modelValue;
+			this.showDetail = false;
+			this.legend = { usage: [], department: [] };
 			let room = request({
 				url: "/space/room/",
 				params: {
@@ -415,6 +442,50 @@
 				this.maintenanceCount = data[ "维保" ].length;
 				this.repairRoom = data[ "维修" ].length;
 			});
+			request({
+				url: "/user/department/",
+				params: {
+					Room__floor: floor
+				}
+			}).then(({ data }) => {
+				this.legend.department = data.map((t:any) => ({
+					name: t.name,
+					color: t.color_code
+				}));
+			});
+			request({
+				url: "/space/category/",
+				params: {
+					Room__floor: floor
+				}
+			}).then(({ data }) => {
+				this.legend.usage = data.map((t:any) => ({
+					name: t.name,
+					color: t.color_code
+				}));
+			});
+			this.pageChange(1);
+		}
+
+		changeColor (value:number) {
+			this.$store.commit("changeColorType", [ "department", "category" ][ value ]);
+		}
+
+		pageChange (page:number = 1) {
+			this.roomLoading = true;
+			this.tableCurrent = page;
+			request({
+				url: "/space/room/",
+				params: {
+					floor: this.$store.state.modelValue,
+					pagesize: 6,
+					page
+				}
+			}).then(({ data }) => {
+				this.total = data.count;
+				this.roomDetail = data.results;
+				this.roomLoading = false;
+			});
 		}
 
 		mounted () {
@@ -424,12 +495,10 @@
 					facility: 1
 				}
 			}).then(({ data }) => {
-				this.floors = data.reverse().map((t:any) => {
-					return {
-						name: t.name,
-						id: t.id
-					};
-				});
+				this.floors = data.reverse().map((t:any) => ({
+					name: t.name,
+					id: t.id
+				}));
 			});
 			this.chartA = new G2.Chart({
 				container: this.chartIdA,
@@ -442,6 +511,9 @@
 				height: 300
 			});
 			this.getCount();
+			if (this.$store.state.showType !== "room") {
+				this.$store.commit("changeViewByCode", { type: "room", id: "" });
+			}
 		}
 
 		beforeRouteLeave (to:Route, from:Route, next:Function) {
