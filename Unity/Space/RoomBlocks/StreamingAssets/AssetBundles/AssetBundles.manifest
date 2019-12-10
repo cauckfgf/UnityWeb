@@ -1,13 +1,7 @@
 ManifestFileVersion: 0
-CRC: 4186000617
+CRC: 2633919793
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: videoui/videoimageuibad
-      Dependencies: {}
-    Info_1:
-      Name: videoui/videoimageuigood
-      Dependencies: {}
-    Info_2:
       Name: videoui/videoclickui
       Dependencies: {}

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1525745901
+CRC: 4155998168
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7a3ac18abe1dfb39ee2eea184aed7d8b
+    Hash: c1a7e3a0c35b7c6355d0c5ad883daddd
   TypeTreeHash:
     serializedVersion: 2
     Hash: b474380d27eb4bc856799e9c585c4864
@@ -14,5 +14,5 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/EditorResources/AssetBundles/videoui/VideoClickUI.png
+- Assets/EditorResources/AssetBundles/videoui/videoclickuI.png
 Dependencies: []
