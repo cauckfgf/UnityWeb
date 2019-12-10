@@ -23,5 +23,6 @@
  {
       gameInstance.logo.style.display = gameInstance.progress.style.display = "none";
   document.body.removeChild(document.getElementById("image"));
+       end(gameInstance);
  }
 }
