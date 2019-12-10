@@ -538,6 +538,8 @@
 								SendMessage("Canvas", "ChangeRoomType", mutation.payload);
 							} else if (mutation.type === "findFloorAndCamera") {
 								SendMessage("Canvas", "ChangeRoomType", `${ mutation.payload[ 0 ] }/true/false/false/false/camera:${ mutation.payload[ 1 ] }`);
+							} else if (mutation.type === "changeWall") {
+								SendMessage("Canvas", "HideWalls", (!mutation.payload).toString());
 							}
 							resolve(SendMessage);
 						});
