@@ -19,7 +19,7 @@
 			position: absolute;
 			left: 100%;
 			width: 80px;
-			top: 25%;
+			top: -7px
 		}
 
 		&:hover {
@@ -28,7 +28,7 @@
 				z-index: 999;
 			}
 
-			& ~ .floor:not(:last-child) {
+			&, & ~ .floor:not(:last-child) {
 				.colorBar {
 					background-color: rgba(30, 144, 255, 0.6);
 				}
@@ -40,7 +40,7 @@
 				display: block;
 			}
 
-			& ~ .floor:not(:last-child) {
+			&.active, & ~ .floor:not(:last-child) {
 				.colorBar {
 					background-color: rgba(0, 255, 154, .6);
 				}

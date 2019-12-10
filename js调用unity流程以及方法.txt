@@ -1,69 +1,69 @@
 ---------------------
-1. ¸Ä±äµ¥¸ö  ·¿¼äÌå¿éÑÕÉ« ´«µİËÄ¸ö²ÎÊı ( Â¥²ã, guid,color,·¿¼äÀàĞÍ(²¿ÃÅ»¹ÊÇÓÃÍ¾))  "/"Çø·Ö  Â¥²ãID 90-117
-   
-    SendMessage("Canvas", "ChangeRoomBlockColor", "Â¥²ã/guid/color/·¿¼äÀàĞÍ");
+1. æ”¹å˜å•ä¸ª  æˆ¿é—´ä½“å—é¢œè‰² ä¼ é€’å››ä¸ªå‚æ•° ( æ¥¼å±‚, guid,color,æˆ¿é—´ç±»å‹(éƒ¨é—¨è¿˜æ˜¯ç”¨é€”))  "/"åŒºåˆ†  æ¥¼å±‚ID 90-117
+
+    SendMessage("Canvas", "ChangeRoomBlockColor", "æ¥¼å±‚/guid/color/æˆ¿é—´ç±»å‹");
 
 
 ----------------------
-2.  ¸ü¸ÄÌå¿éÀàĞÍÑÕÉ« ÓÃÍ¾´«µİ--"category"  ²¿ÃÅ´«µİ--"department"
+2.  æ›´æ”¹ä½“å—ç±»å‹é¢œè‰² ç”¨é€”ä¼ é€’--"category"  éƒ¨é—¨ä¼ é€’--"department"
 
    SendMessage("Canvas", "ChangeRoomType", "category  or  department");
 
 ----------------------
-3.Â¥²ãÇĞ»»  1.Â¥²ãID(90-117) 2.¼à¿ØÉãÏñÍ·ÊÇ·ñ¿ªÆô 3.ÈËÁ³Ê¶±ğÊÇ·ñ¿ªÆô 4.ÊÇ·ñÖ»ÔÚ¿Õ¼äÌå¿é½çÃæ  5ÊÇ·ñ¿ªÆôÁËÂşÓÎ  bool-->false/true  ÈËÁ³ºÍÉãÏñÍ·ÔİÊ±Ã»ÓĞ¶¼Îªfalse
-   
-   SendMessage("Canvas", "ChangeFloor","Â¥²ãºÅ/bool(isCamera)/bool(Isface)/bool(ISblock)/bool (ÍË³öÂşÓÎ)");
+3.æ¥¼å±‚åˆ‡æ¢  1.æ¥¼å±‚ID(90-117) 2.ç›‘æ§æ‘„åƒå¤´æ˜¯å¦å¼€å¯ 3.äººè„¸è¯†åˆ«æ˜¯å¦å¼€å¯ 4.æ˜¯å¦åªåœ¨ç©ºé—´ä½“å—ç•Œé¢  5æ˜¯å¦å¼€å¯äº†æ¼«æ¸¸  bool-->false/true  äººè„¸å’Œæ‘„åƒå¤´æš‚æ—¶æ²¡æœ‰éƒ½ä¸ºfalse
+
+   SendMessage("Canvas", "ChangeFloor","æ¥¼å±‚å·/bool(isCamera)/bool(Isface)/bool(ISblock)/bool (é€€å‡ºæ¼«æ¸¸)");
 
 ----------------------
-4 ÇĞ»»Â¥²ãºó Ïà»úÒÆ¶¯µ½guid¶ÔÓ¦ÎïÌå 
-  (1.)È·ÈÏÔÚ±¾Â¥²ã  guid
+4 åˆ‡æ¢æ¥¼å±‚å ç›¸æœºç§»åŠ¨åˆ°guidå¯¹åº”ç‰©ä½“
+  (1.)ç¡®è®¤åœ¨æœ¬æ¥¼å±‚  guid
  SendMessage("Canvas", "ChangeCamera","guid");
-   (2.)Ìå¿é²»ÔÚ±¾Â¥²ã  5¸ö²ÎÊı
- SendMessage("Canvas", "ChangeFloor","Â¥²ãºÅ/bool(isCamera)/bool(Isface)/bool(ISblock)/bool (ÍË³öÂşÓÎ)/guid");
+   (2.)ä½“å—ä¸åœ¨æœ¬æ¥¼å±‚  5ä¸ªå‚æ•°
+ SendMessage("Canvas", "ChangeFloor","æ¥¼å±‚å·/bool(isCamera)/bool(Isface)/bool(ISblock)/bool (é€€å‡ºæ¼«æ¸¸)/guid");
 
 ----------------------
-5.ÊÇ·ñÇĞ»»µ½Ö»ÓĞÌå¿éµÄ»·¾³ 
+5.æ˜¯å¦åˆ‡æ¢åˆ°åªæœ‰ä½“å—çš„ç¯å¢ƒ
 
 
 SendMessage("Canvas", "SwitchOnlyBlocks","bool");
 
 
-6.ÊÇ·ñÒş²Ø´ó»·¾³
+6.æ˜¯å¦éšè—å¤§ç¯å¢ƒ
 SendMessage("Canvas", "HideEviromentofThewall","bool");
 
-7. ÊÇ·ñÒş²ØÇ½±Ú
+7. æ˜¯å¦éšè—å¢™å£
 
 SendMessage("Canvas", "HideWalls","bool");
 
 
-8. ÊÇ·ñÒş²ØÇ½ÄÚ
+8. æ˜¯å¦éšè—å¢™å†…
 
 SendMessage("Canvas", "HideInsideTheWall","bool");
 
 -------------------------
-9. ÊÇ·ñÒş²ØÈËÁ³
+9. æ˜¯å¦éšè—äººè„¸
 
 SendMessage("Canvas", "HideCameraFace","bool");
 
 
 
-10. ÊÇ·ñÒş²ØÆÕÍ¨ÉãÏñÍ·
+10. æ˜¯å¦éšè—æ™®é€šæ‘„åƒå¤´
 
 SendMessage("Canvas", "HideCommonCamera","bool");
 
 -----------------
-11.¸ßÁÁÈ¡Ïû
+11.é«˜äº®å–æ¶ˆ
 
 SendMessage("Canvas", "CancelHighlihter");
 
 
 ----------------
-12.Ïà»ú¸©ÊÓ½Ç ¶ÔÓ¦Â¥²ãID(90-117)
+12.ç›¸æœºä¿¯è§†è§’ å¯¹åº”æ¥¼å±‚ID(90-117)
 
 SendMessage("Canvas", "OnCommonCameraLookDown","floorid")
-  
+
 ----------------
-13.¿ªÆôÎ¬ĞŞÎ¬±£
+13.å¼€å¯ç»´ä¿®ç»´ä¿
 
 
 SendMessage("Canvas", "OpenRepair")

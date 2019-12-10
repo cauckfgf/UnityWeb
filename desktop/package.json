@@ -16,6 +16,7 @@
     "cookie": "^0.4.0",
     "core-js": "^3.3.2",
     "countup.js": "^2.0.4",
+    "hls.js": "^0.12.4",
     "moment": "latest",
     "register-service-worker": "^1.6.2",
     "view-design": "^4.0.2",
@@ -27,6 +28,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@types/hls.js": "^0.12.5",
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/cli-plugin-pwa": "^4.0.0",

@@ -514,10 +514,12 @@
 			if (this.$store.state.showType !== "room") {
 				this.$store.commit("changeViewByCode", { type: "room", id: "" });
 			}
+			this.$store.commit("changeWall", false);
 		}
 
 		beforeRouteLeave (to:Route, from:Route, next:Function) {
 			this.subscribe();
+			this.$store.commit("changeWall", true);
 			next();
 		}
 	}

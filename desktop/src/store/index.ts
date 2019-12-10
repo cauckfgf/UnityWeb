@@ -7,7 +7,9 @@ export default new Vuex.Store({
 	state: {
 		showType: "room",
 		modelValue: "",
-		colorType: "category"
+		colorType: "category",
+		showWalls: true,
+		liveStream: ""
 	},
 	mutations: {
 		changeViewByCode (state, payload) {
@@ -16,6 +18,15 @@ export default new Vuex.Store({
 		},
 		changeColorType (state, payload) {
 			state.colorType = payload;
+		},
+		changeWall (state, payload) {
+			state.showWalls = payload;
+		},
+		updateLiveStream (state, payload) {
+			state.liveStream = payload.split(",")[ 1 ];
+		},
+		findFloorAndCamera (state, payload) {
+			state.modelValue = payload[ 0 ];
 		}
 	},
 	actions: {},

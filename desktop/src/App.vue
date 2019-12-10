@@ -192,6 +192,12 @@
 	@input-color: #FFF;
 	@input-bg: transparent;
 	@subsidiary-color: #FFF;
+	@background-color-base: @infoBlockBackground;
+	@table-thead-bg: @lightTitleBackground;
+	@head-bg: @lightTitleBackground;
+	@border-color-base: lighten(@infoBlockBackground, 20%);
+	@table-td-hover-bg: lighten(@infoBlockBackground, 40%);
+	@text-color: #FFF;
 	.ivu-select-dropdown {
 		background-color: @infoBlockBackground;
 	}
@@ -215,6 +221,18 @@
 
 	.ivu-page-simple .ivu-page-simple-pager input {
 		color: #000
+	}
+
+	.ivu-table {
+		color: #FFF;
+
+		td {
+			background-color: @infoBlockBackground;
+		}
+	}
+
+	.ivu-table-wrapper > .ivu-spin-fix {
+		background-color: @darkBackground;
 	}
 </style>
 <template>
@@ -433,56 +451,99 @@
 				}
 			];
 			// @ts-ignore
-			let frame:HTMLIFrameElement | null;
-			const Interval = setInterval(() => {
-				// @ts-ignore
-				frame = window.frames.frame;
-				// @ts-ignore
-				if (frame && frame.contentWindow && frame.contentWindow.gameInstance) {
-					clearInterval(Interval);
+			let children:HTMLIFrameElement | null = window.frames.frame;
+			let workLine:Promise<any>[] = [];
+			workLine.push(
+				new Promise(resolve => {
 					// @ts-ignore
-					frame.contentWindow.selected = (id:string) => {
-						if (this.$route.name === "home") {
-							this.cancelToken && this.cancelToken();
-							request({
-								url: "/model/rest/pb/guid2obj/",
-								params: {
-									guid: id
-								},
-								cancelToken: new CancelToken(cancel => {
-									this.cancelToken = cancel;
-								})
-							}).then(({ data }) => {
-								this.attachInfo = [
-									{ name: "名称", value: data.rooms[ 0 ].Name },
-									{ name: "楼层", value: data.rooms[ 0 ].floor__name },
-									{ name: "编号", value: data.rooms[ 0 ].number }
-								];
-								this.showAttach = true;
-							});
-						}
+					children.contentWindow.end = function (instance) {
+						resolve(instance.SendMessage);
+						console.log("load end");
 					};
-					this.$store.subscribe((mutation) => {
+				})
+			);
+			workLine.push(
+				new Promise(resolve => {
+					workLine[ 0 ].then(SendMessage => {
 						// @ts-ignore
-						const SendMessage:Function = frame.contentWindow.gameInstance.SendMessage;
-						if (mutation.type === "changeViewByCode") {
-							const id = mutation.payload.id;
-							if (id === "") {
-								SendMessage("Canvas", "HideEviromentofThewall", "true");
-								SendMessage("Canvas", "SwitchOnlyBlocks", "false");
-							} else {
-								SendMessage("Canvas", "ChangeFloor", mutation.payload.id + "/false/false/false/false");
-								if (id !== "91") {
-									SendMessage("Canvas", "HideEviromentofThewall", "true");
-								}
+						children.contentWindow.selected = (id:string) => {
+							if (this.$route.name === "home") {
+								this.cancelToken && this.cancelToken();
+								request({
+									url: "/model/rest/pb/guid2obj/",
+									params: {
+										guid: id
+									},
+									cancelToken: new CancelToken(cancel => {
+										this.cancelToken = cancel;
+									})
+								}).then(({ data }) => {
+									this.attachInfo = [
+										{ name: "名称", value: data.rooms[ 0 ].Name },
+										{ name: "楼层", value: data.rooms[ 0 ].floor__name },
+										{ name: "编号", value: data.rooms[ 0 ].number }
+									];
+									this.showAttach = true;
+								});
 							}
-						} else if (mutation.type === "changeColorType") {
-							SendMessage("Canvas", "ChangeRoomType", mutation.payload);
-							console.log(mutation.payload);
-						}
+						};
+						resolve(SendMessage);
 					});
-				}
-			}, 100);
+				})
+			);
+			workLine.push(
+				new Promise(resolve => {
+					workLine[ 0 ].then(SendMessage => {
+						// @ts-ignore
+						children.contentWindow.getMessage = (id:string) => {
+							const event:{ name:string, value:string } = JSON.parse(id);
+							if (event.name === "camera") {
+								this.$store.commit("updateLiveStream", event.value);
+							}
+						};
+						resolve(SendMessage);
+					});
+				})
+			);
+			this.$store.subscribe(mutation => {
+				workLine.push(
+					new Promise(resolve => {
+						console.log("new event", mutation);
+						workLine[ workLine.length - 1 ].then((SendMessage) => {
+							console.log("event start", mutation);
+							if (mutation.type === "changeViewByCode") {
+								const id = mutation.payload.id;
+								if (this.$route.name && this.$route.name.indexOf("smt") > -1) {
+									if (id === "") {
+										SendMessage("Canvas", "HideEviromentofThewall", "true");
+										SendMessage("Canvas", "SwitchOnlyBlocks", "false");
+									} else {
+										SendMessage("Canvas", "ChangeFloor", id + "/true/false/false/false");
+										if (id !== "91") {
+											SendMessage("Canvas", "HideEviromentofThewall", "true");
+										}
+									}
+								} else {
+									if (id === "") {
+										SendMessage("Canvas", "HideEviromentofThewall", "true");
+										SendMessage("Canvas", "SwitchOnlyBlocks", "false");
+									} else {
+										SendMessage("Canvas", "ChangeFloor", mutation.payload.id + "/false/false/false/false");
+										if (id !== "91") {
+											SendMessage("Canvas", "HideEviromentofThewall", "true");
+										}
+									}
+								}
+							} else if (mutation.type === "changeColorType") {
+								SendMessage("Canvas", "ChangeRoomType", mutation.payload);
+							} else if (mutation.type === "findFloorAndCamera") {
+								SendMessage("Canvas", "ChangeRoomType", `${ mutation.payload[ 0 ] }/true/false/false/false/camera:${ mutation.payload[ 1 ] }`);
+							}
+							resolve(SendMessage);
+						});
+					})
+				);
+			});
 		}
 	}
 </script>
